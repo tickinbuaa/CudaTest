@@ -3,13 +3,9 @@ project(CudaTest CUDA)
 
 set(CMAKE_CUDA_STANDARD 11)
 
+if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
+  set(CMAKE_CUDA_ARCHITECTURES 75)
+endif()
+
 add_executable(CudaTest main.cu)
 
-target_compile_options(CudaTest PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:
-        -arch compute_75
-        -code sm_75
-        -m 64
-        >)
-
-set_target_properties(CudaTest PROPERTIES
-        CUDA_SEPARABLE_COMPILATION ON)
